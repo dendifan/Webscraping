@@ -9,15 +9,18 @@ from bs4 import BeautifulSoup
 path = "./chromedriver.exe"
 driver = webdriver.Chrome(service=Service(path))
 
-url1 = "https://www.pinksale.finance/launchpad/0x148c295B7EE3A854d0dCD37dD10B7994c920f55B?chain=ETH"
-url2 = "https://www.pinksale.finance/launchpad/0x9f39D96d22da1e00bF1B6573fDDF9a12DAB7E3E7?chain=BSC"
-def scrapData(url):
+url1 = "https://visa.vfsglobal.com/ind/en/pol/login"
+def scrapData(url, email, password):
     driver.get(url)
+    time.sleep(8)
+    driver.find_element(By.XPATH, '//*[@id="mat-input-0"]').send_keys(email)
     time.sleep(3)
-    projectName = driver.find_element(By.XPATH, '//*[@id="root"]/section/section/main/div[2]/div[1]/div[1]/div[1]/div/article/div[2]/div[1]/div[1]/div/h1').text
-    print("project name is: ", projectName)
+    driver.find_element(By.XPATH, '//*[@id="mat-input-1"]').send_keys(password)
+    time.sleep(5)
+    driver.find_element(By.XPATH, '/html/body/app-root/div/app-login/section/div/div/mat-card/form/button').click()
+    time.sleep(8)
+email = "vfspoland5@explodemail.com"
+password = "Test123@"
 
-scrapData(url1)
-scrapData(url2)
-
+scrapData(url1, email, password)
 driver.quit()
